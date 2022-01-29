@@ -260,7 +260,7 @@ def transliterate(source):
     # normalisation: replace consonant + nukta by equivalent
     # consonants
     orig = source
-    for char, combination in nukta_consonants.iteritems():
+    for char, combination in nukta_consonants.items():
         source = source.replace(combination, char)
 
     # transliterate character by character
@@ -348,8 +348,7 @@ def transliterate(source):
                 start, end = i - 3, i + 3
                 if start < 0:
                     start, end = 0, end - start
-                raise TransliterationError, \
-                    'no transliteration for Devanagari %r (%r)' % (char, source[start:end])
+                raise TransliterationError('no transliteration for Devanagari %r (%r)' % (char, source[start:end]))
             result.append(char)
 
         i += 1
@@ -363,7 +362,7 @@ if __name__ == '__main__':
         try:
             sys.stdout.write(
                 transliterate(line.decode('utf-8')).encode('utf-8'))
-        except TransliterationError, e:
+        except TransliterationError as e:
             sys.stderr.write(e.message + '\n')
             status = 1
     sys.exit(status)
